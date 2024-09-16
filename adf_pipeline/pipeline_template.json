@@ -1,0 +1,37 @@
+{
+    "name": "OptiWarePipeline",
+    "properties": {
+      "activities": [
+        {
+          "name": "CopyFromADLS",
+          "type": "Copy",
+          "inputs": [
+            {
+              "referenceName": "ADLSInputDataset",
+              "type": "DatasetReference"
+            }
+          ],
+          "outputs": [
+            {
+              "referenceName": "KafkaOutputDataset",
+              "type": "DatasetReference"
+            }
+          ],
+          "typeProperties": {
+            "source": {
+              "type": "BlobSource"
+            },
+            "sink": {
+              "type": "KafkaSink",
+              "typeProperties": {
+                "bootstrapServers": "localhost:9092",
+                "topic": "optidata"
+              }
+            }
+          }
+        }
+      ],
+      "description": "Pipeline for processing data and integrating with Kafka"
+    }
+  }
+  
